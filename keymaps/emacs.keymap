@@ -1,0 +1,32 @@
+{:+ {:app {
+           ;;; Add'l Emacs bindings
+           "ctrl-x ctrl-c" [:quit]
+           "ctrl-_" [:editor.undo]
+           "ctrl-x ctrl-f" [:claire-show]
+           "ctrl-x b" [:tabs.last]
+           "ctrl-x 0" [:tabset.close]
+
+
+           ;; @NOTE: The following emacs bindings need a _lot_ of work.
+           "ctrl-x 1" [:tabset.next :tabset.close]
+           "ctrl-x 2" [:tabset.new]
+           "ctrl-x ctrl-o" [:tabs.move-next-tabset]
+           }
+
+     :editor {"ctrl-x ctrl-e" [:eval-editor-form (:emacs.keymap-cmd "Ctrl-Space")]
+              "ctrl-x ctrl-shift-e" [:eval-editor]}
+
+     :editor.keys.emacs {"ctrl-d" [:passthrough]
+                         "ctrl-x o" [:tabset.next :tabs.focus-active]}
+
+     :commandbar {"ctrl-g" [:show-commandbar-transient]}} ; @TODO: Need a way to explicitly specify hide only.
+
+:- {:app {"ctrl-space" [:show-commandbar-transient]
+          "ctrl-x ctrl-f" [:navigate-workspace-transient]
+          "ctrl-x o" [:tabs.next]}
+    :editor.keys.emacs ["ctrl-d"
+                        "alt-d"
+                        "alt-w"
+                        "ctrl-x ctrl-f"
+                        "ctrl-t"
+                        ]}}

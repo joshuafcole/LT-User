@@ -1,0 +1,75 @@
+;; User keymap
+;; -----------------------------
+;; Keymaps are stored as a set of diffs that are merged together together
+;; to create the final set of keys. You can modify these diffs to either add
+;; or subtract bindings.
+;;
+;; Like behaviors, keys are bound by tag. When objects with those tags are active
+;; the key bindings are live. Keys can be bound to any number of Light Table commands,
+;; allowing you the flexibility to execute multiple operations together. To see a list
+;; of all the commands you can execute, start typing a word related to the thing you
+;; want to do in between the square brackets (e.g. type "editor").
+
+{:+ {:app {;;; Show panes
+           "ctrl-home" [:workspace.show]
+           "ctrl-shift-home" [:workspace.show-recents]
+           "alt-s" [:searcher.show]
+           "alt-i" [:dev-inspector]
+
+           ;;; Misc.
+           "ctrl-shift-c" [:editor.copy]
+           "ctrl-shift-v" [:editor.paste]
+
+           "ctrl-left" [:editor.word-left]
+           "ctrl-right" [:editor.word-right]
+           "alt-left" [:editor.group-left]
+           "alt-right" [:editor.group-right]
+
+           "ctrl-x ]" [:tabs.move-next-tabset]
+           "ctrl-x [" [:tabs.move-prev-tabset]
+
+           "ctrl-x n" [:tabs.next]
+           "ctrl-x p" [:tabs.prev]}
+
+     :editor {"alt-w" [:editor.watch.watch-selection (:emacs.keymap-cmd "Ctrl-Space")]
+              "ctrl-alt-w i" [:rolex.watch.lt-objs-summary (:emacs.keymap-cmd "Ctrl-Space")]
+              "ctrl-alt-w s" [:rolex.watch.values-over-time (:emacs.keymap-cmd "Ctrl-Space")]
+              "ctrl-alt-w j" [:rolex.watch.to-console-as-js (:emacs.keymap-cmd "Ctrl-Space")]
+              "ctrl-alt-w t" [:rolex.watch.rough-time (:emacs.keymap-cmd "Ctrl-Space")]
+              "alt-shift-w" [:editor.watch.unwatch (:emacs.keymap-cmd "Ctrl-Space")]
+
+              "ctrl-shift-9" [:paredit.grow.left]
+              "ctrl-shift-0" [:paredit.grow.right]
+              "ctrl-[" [:paredit.shrink.left]
+              "ctrl-]" [:paredit.shrink.right]}
+
+     :filter-list.input {"tab" [(:filter-list.input.move-selection 1)]
+                         "shift-tab" [(:filter-list.input.move-selection -1)]}
+
+     :find-bar {"alt-r" [:find.replace]
+                "alt-shift-r" [:find.replace-all]}
+
+     :searcher {"ctrl-n" [:searcher.next]
+                "ctrl-p" [:searcher.prev]
+                ;; @TODO: Add :searcher.replace (one)
+                "alt-shift-r" [:searcher.replace-all]}
+
+
+     ;;; Project specific shortcuts
+     ;; @TODO: associate these w/ workspaces.
+
+     :editor.cljs {"ctrl-c ctrl-r" [:eval-editor-form
+                                    (:eval.custom "(horror.client.main/populate)")]
+                   "ctrl-c ctrl-p" [(:eval.custom "(horror.client.main/pause)")]
+                   "ctrl-c ctrl-l" [(:eval.custom "(horror.client.main/play)")]}
+
+
+     :editor.scss {"ctrl-c ctrl-t" [(:editor.jump-to "/home/josh/repos/light-table/lightshow/css/theme.css")
+                                    (:eval-editor)
+                                    (:editor.unjump)]
+                   "ctrl-c ctrl-s" [(:editor.jump-to "/home/josh/repos/light-table/lightshow/css/skin.css")
+                                    (:eval-editor)
+                                    (:editor.unjump)]}}
+
+  :- {
+      }}

@@ -1,0 +1,110 @@
+;; User behaviors
+;; -----------------------------
+;; Behaviors are stored as a set of diffs that are merged together
+;; to create the final set of functionality that makes up Light Table. You can
+;; modify these diffs to either add or subtract functionality.
+;;
+;; Behaviors are added to tags, objects with those tags then automatically gain
+;; whatever logic the behavior imparts. To see a list of user-level behaviors,
+;; start typing a word related to the functionality you want in between the square
+;; brackets (e.g. "theme").
+
+{:+ {
+     ;; The app tag is kind of like global scope. You assign behaviors that affect
+     ;; all of Light Table here
+     :app [
+           (:lt.objs.plugins/load-js "user_compiled.js")
+           (:lt.objs.plugins/load-keymap "keymaps/emacs.keymap")
+           (:lt.objs.plugins/load-keymap "keymaps/user.keymap")
+           (:lt.objs.plugins/load-keymap "keymaps/mac.keymap")
+
+
+           :lt.objs.sidebar.workspace/workspace.open-on-start
+           ;(:lt.objs.style/set-skin "lightshow")
+          ]
+
+     :tabset.tab [:lt.plugins.user/push-active-tab]
+     :tabs-extended [:lt.plugins.user/last-tab]
+
+     ;; The editor tag is applied to all editors
+     :editor [:lt.objs.editor/no-wrap
+              :lt.objs.editor/line-numbers
+              :lt.objs.editor/highlight-current-line
+              :lt.objs.editor.file/last-char-newline
+              :lt.objs.editor.file/remove-trailing-whitespace
+              :lt.plugins.emacs/activate-emacs
+              (:lt.objs.style/set-theme "lightshow")
+              ]
+
+     :editor.javascript [:lt.plugins.jshint/on-change
+                         (:lt.plugins.jshint/jshint-options
+                          {:browser false
+                           :node true
+                           :bitwise true
+                           :curly true
+                           :eqeqeq true
+                           :forin false
+                           :immed true
+                           :newcap true
+                           :noarg true
+                           :noempty true
+                           :nomen false
+                           :onevar false
+                           :plusplus false
+                           :regexp false
+                           :strict false
+                           :trailing true
+                           :unused "var"
+                           :white false
+                           :asi false
+                           :boss false
+                           :debug false
+                           :eqnull false
+                           :es5 false
+                           :esnext false
+                           :evil true
+                           :expr false
+                           :funcscope false
+                           :globalstrict false
+                           :iterator false
+                           :lastsemic false
+                           :laxbreak true
+                           :laxcomma false
+                           :loopfunc false
+                           :multistr false
+                           :onecase false
+                           :proto false
+                           :predef (
+                                    "it"
+                                    "describe"
+
+                                    "define"
+                                    )
+                           :regexdash false
+                           :scripturl false
+                           :shadow false
+                           :smarttabs false
+                           :sub false
+                           :supernew false
+                           :maxerr 500
+                           :maxlen 150
+                           :passfail false
+                           :latedef true
+                           :undef true
+                           })]
+
+     :editor.dust [((:lt.objs.editor/tab-settings false 0 2))]
+     :editor.html [((:lt.objs.editor/tab-settings false 0 2))]
+
+     ;:tern.config [(:lt.plugins.tern/libs :ecma5 :jquery :underscore)
+     ;              (:lt.plugins.tern/plugin :node true)]
+
+     }
+
+
+ ;; You can use the subtract key to remove behavior that may get added by
+ ;; another diff
+ :- {:app [:lt.objs.intro/show-intro
+           :lt.objs.menu/create-menu
+           :lt.objs.menu/set-menu]
+     :window [:lt.objs.menu/set-menu]}}

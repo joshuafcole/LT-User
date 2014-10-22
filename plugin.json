@@ -1,0 +1,10 @@
+{
+  "name": "User",
+  "author": "Joshua Cole",
+  "version": "0.0.2",
+  "source": "https://github.com/joshuafcole/user",
+  "desc": "Josh's user conf.",
+  "dependencies": {
+  },
+  "behaviors": "user.behaviors"
+}

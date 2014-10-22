@@ -1,0 +1,3 @@
+{:+ {:app {"cmd-x" [:show-commandbar-transient]}
+     :editor {"cmd-c" [:editor.copy]
+              "cmd-v" [:editor.paste]}}}
